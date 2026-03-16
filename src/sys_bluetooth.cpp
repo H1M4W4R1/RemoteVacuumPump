@@ -8,6 +8,13 @@
 #include "ble_callbacks/ExpectedPumpingTimeCharacteristicCallbacks.h"
 #include "ble_callbacks/ValveLockAllowedCharacteristicCallbacks.h"
 
+class ServerCallbacks : public BLEServerCallbacks {
+    void onDisconnect(BLEServer* pServer) override {
+        BLEDevice::startAdvertising();
+        Serial.println("[Device] Client disconnected, restarting advertising.");
+    }
+};
+
 // BLE
 BLECharacteristic* totalSessionTimeCharacteristic;
 BLECharacteristic* valveLockedCharacteristic;
@@ -23,6 +30,7 @@ void sys_bluetooth_init()
     // Setup BLE
     BLEDevice::init("Vacuum Pump Prototype");
     BLEServer*  pServer  = BLEDevice::createServer();
+    pServer->setCallbacks(new ServerCallbacks());
     BLEService* pService = pServer->createService(SERVICE_UUID_CORE_FUNC);
 
     // Session time characteristic
