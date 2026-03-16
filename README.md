@@ -7,10 +7,7 @@ A dual-interface (BLE + 433 MHz RF) embedded controller for a pneumatic pump uni
 ---
 
 ## Device Photo
-<center>
-![Pump image](./images/pump.webp)
-</center> 
-> *Photo coming soon*
+![Pump image](https://github.com/H1M4W4R1/RemoteVacuumPump/blob/master/images/pump.webp?raw=true)
 
 ---
 
